@@ -10,7 +10,92 @@
 </head>
 <body>
     <div class="container">
+        <section>
+            <div class="profile">
+                <h1>
+                    <a href="profile.html"><span class="material-symbols-outlined">account_circle</span>username</a>
+                </h1>
+            </div>
 
+            <!-- navbar -->
+            <nav>
+                <ul>
+                    <li><a href="tracker.html"><span class="material-symbols-outlined">home</span>Home</a></li>
+                    <li><a href="history.html"><span class="material-symbols-outlined">history</span>History</a></li>
+                    <li><a href="settings.html"><span class="material-symbols-outlined">settings</span>settings</a></li>
+                </ul>
+            </nav>
+            
+        </section>
+
+        <!-- main content -->
+        <section>
+            <header>
+                <h1 class="main-header"><span class="material-symbols-outlined">calendar_check</span>TRACK-FLOW</h1>
+
+                <h1><span class="material-symbols-outlined">home</span>Home</h1>
+            </header>
+
+            <main>
+                <div>
+                    <button><span class="material-symbols-outlined">add</span>Add activity</button>
+                    <p>Week: August 14th 2025 - August 21st 2025</p>
+                </div>
+
+                <!-- tabel -->  
+                <table border="1">
+                    <caption>Weekly Activity Tracker</caption>
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Weekly target</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                            <th>Sun</th>
+                            <th>Progress</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Coding</td>
+                            <td>4x</td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox"></td>
+                            <td>0%</td>
+                            <td>
+                                <button><span class="material-symbols-outlined">more_horiz</span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
+
+            <div class="modal-view">
+                <div class="modal-content">
+                    <h2>Add Activity</h2>
+                    <form>
+                        <label for="activityName">Activity name:</label><br>
+                        <input type="text" id="activityName" name="activityName" required>
+                        <label for="WeeklyTarget">Weekly target:</label>
+                        <input type="number" id="WeeklyTarget" name="target" min="1" required>
+                        <div class="modal-actions">
+                            <button type="submit">Save</button>
+                            <button type="button" id="cancel-modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>
