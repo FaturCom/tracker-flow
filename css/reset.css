@@ -30,3 +30,13 @@ a {
 ul, ol {
   list-style: none;
 }
+
+button {
+  outline: none;
+  border: none;
+}
+
+button:focus {
+  outline: none;
+  border: none;
+}

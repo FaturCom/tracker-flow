@@ -1,1 +1,235 @@
 /* STYLE UTAMA APP */
+
+.container{
+    display: flex;
+    gap: 10px;
+}
+
+/* STYLE SIDEBAR */
+.sidebar{
+    padding: 10px;
+    height: 100vh;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    background-color: #6397f1;
+    color: white;
+}
+
+
+/* profile */
+
+.profile h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.profile a {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+}
+
+.profile .material-symbols-outlined {
+    font-size: 1.8rem;
+    vertical-align: middle;
+}
+
+/* navbar */
+
+nav li{
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+nav li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: inherit;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+nav li .material-symbols-outlined {
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+/* main content */
+
+.main-content{
+    margin: 0.8rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.main-content header{
+    display: flex;
+    margin-top: 0.2rem;
+    background-color: #6397f1;
+    border-radius: 10px;
+    color: white;
+    padding: 16px;
+    justify-content: space-between;
+}
+
+.main-content header h1{
+    display: flex;
+    align-items: center;
+}
+
+.main-content header .material-symbols-outlined{
+    vertical-align: middle;
+}
+
+.tracker-header{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#add-button{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    color: white;
+    background-color: #6397f1;
+    border-radius: 5px;
+}
+
+#add-button .material-symbols-outlined {
+    vertical-align: middle;
+}
+
+/* TABEL TRACKER */
+.main-content table {
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 100%;
+    min-width: 80%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.main-content th, .main-content td {
+    padding: 14px 10px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.main-content th {
+    background: #f1f5f9;
+    color: #374151;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.main-content tr:last-child td {
+    border-bottom: none;
+}
+
+.main-content tr:hover {
+    background: #f3f4f6;
+}
+
+.activity-actions-edit, .activity-actions-delete{
+    color: white;
+    padding: 4px;
+}
+
+.activity-actions-edit{
+    background-color: #6397f1;
+}
+
+.activity-actions-delete{
+    background-color: #f16363;
+}
+
+/* modal view */
+.modal-view{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.35);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    padding: 2rem 1.5rem;
+    min-width: 320px;
+    max-width: 90vw;
+    width: 400px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    animation: modalFadeIn 0.2s;
+}
+
+@keyframes modalFadeIn {
+    from { transform: translateY(40px) scale(0.98); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-content h2{
+    text-align: center;
+}
+
+.modal-content label{
+    font-weight: bold;
+}
+
+.modal-content input{
+    padding: 4px;
+    width: 100%;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.modal-actions{
+    display: flex;
+    gap: 4px;
+}
+
+.modal-content button{
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    padding: 6px;
+}
+
+#modal-submit{
+    background-color: rgb(0, 202, 0);
+}
+
+#modal-close{
+    background-color: red;
+}
+
+.hidden{
+    display: none;
+}
