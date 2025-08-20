@@ -39,17 +39,18 @@
 }
 /* PROFILE CARD */
 .profile-card {
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-    padding: 2rem 1.5rem;
-    max-width: 40%;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1.5px solid #e5e7eb;
+    box-shadow: none;
+    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+    max-width: 420px;
     width: 100%;
     min-width: 280px;
-    margin: 2rem auto;
+    margin: 2.5rem auto 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 1.6rem;
+    gap: 2.2rem;
     align-items: center;
 }
 
@@ -88,6 +89,12 @@
     font-size: 1rem;
     color: #222;
 }
+.profile-actions{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
 .profile-edit-btn {
     display: flex;
     align-items: center;
@@ -98,13 +105,17 @@
     border-radius: 6px;
     font-size: 1rem;
     font-weight: 600;
-    cursor: not-allowed;
+    cursor: pointer ;
     padding: 10px 16px;
     margin-top: 8px;
     width: 100%;
-    transition: background 0.2s;
+    transition: opacity 0.2s;
+}
+
+.profile-edit-btn:hover{
     opacity: 0.7;
 }
+
 .profile-edit-btn .material-symbols-outlined {
     font-size: 1.2rem;
 }
@@ -176,6 +187,11 @@ nav li .material-symbols-outlined {
     color: white;
     background-color: #6397f1;
     border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+#add-button:hover{
+    cursor: pointer;
 }
 
 #add-button .material-symbols-outlined {
@@ -220,6 +236,11 @@ nav li .material-symbols-outlined {
     color: white;
     padding: 4px;
     border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.activity-actions-edit:active, .activity-actions-delete:active, #add-button:active{
+    transform: scale(0.95);
 }
 
 .activity-actions-edit{
@@ -312,4 +333,74 @@ input[type="checkbox"]{
 
 .hidden{
     display: none;
+}
+
+/* SETTINGS CARD */
+.settings-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1.5px solid #e5e7eb;
+    box-shadow: none;
+    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+    max-width: 420px;
+    margin: 2.5rem auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+}
+.settings-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    padding: 1.1rem 1rem 1rem 1rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.settings-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: #3b3b3b;
+    margin-bottom: 2px;
+}
+.settings-desc {
+    color: #5a5a5a;
+    font-size: 0.97rem;
+    line-height: 1.5;
+}
+.settings-select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1.2px solid #cbd5e1;
+    font-size: 1rem;
+    background: #f1f5f9;
+    color: #222;
+    width: 100%;
+    margin-top: 2px;
+}
+.settings-logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f16363;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 12px 18px;
+    margin-top: 10px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(241,99,99,0.08);
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s, box-shadow 0.2s;
+}
+.settings-logout-btn:hover {
+    opacity: 0.7;
+    box-shadow: 0 4px 16px rgba(241,99,99,0.13);
 }
