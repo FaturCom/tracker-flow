@@ -37,6 +37,77 @@
     font-size: 1.8rem;
     vertical-align: middle;
 }
+/* PROFILE CARD */
+.profile-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    padding: 2rem 1.5rem;
+    max-width: 40%;
+    width: 100%;
+    min-width: 280px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: center;
+}
+
+.profile-info-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.profile-icon {
+    font-size: 3rem;
+    color: #6397f1;
+}
+#profile-username {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #374151;
+}
+.profile-id {
+    font-size: 0.95rem;
+    color: #888;
+}
+.profile-detail {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+.profile-detail label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2px;
+}
+.profile-detail span {
+    font-size: 1rem;
+    color: #222;
+}
+.profile-edit-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #6397f1;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: not-allowed;
+    padding: 10px 16px;
+    margin-top: 8px;
+    width: 100%;
+    transition: background 0.2s;
+    opacity: 0.7;
+}
+.profile-edit-btn .material-symbols-outlined {
+    font-size: 1.2rem;
+}
 
 /* navbar */
 
@@ -148,6 +219,7 @@ nav li .material-symbols-outlined {
 .activity-actions-edit, .activity-actions-delete{
     color: white;
     padding: 4px;
+    border-radius: 5px;
 }
 
 .activity-actions-edit{
@@ -156,6 +228,14 @@ nav li .material-symbols-outlined {
 
 .activity-actions-delete{
     background-color: #f16363;
+}
+
+.disable-button{
+    background-color: gray;
+}
+
+input[type="checkbox"]{
+  transform: scale(1.3);
 }
 
 /* modal view */
