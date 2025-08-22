@@ -111,9 +111,10 @@
                     </tbody>
                 </table>
             </main>
-
+            
+            <!-- modal view -->
             <div class="modal-view hidden">
-                <div class="modal-content">
+                <div class="modal-content" id="modal-activity">
                     <h2>Add New Activity</h2>
                     <form>
                         <label for="activityName">Activity name:</label><br>
@@ -121,13 +122,14 @@
                         <label for="WeeklyTarget">Weekly target:</label><br>
                         <input type="number" id="WeeklyTarget" name="target" min="1" required><br>
                         <div class="modal-actions">
-                            <button type="submit" id="modal-submit"><span class="material-symbols-outlined">add</span>Add</button>
-                            <button type="button" id="modal-close"><span class="material-symbols-outlined">Close</span>Cancel</button>
+                            <button type="button" class="modal-close" id="modal-close-activity"><span class="material-symbols-outlined">Close</span>Cancel</button>
+                            <button type="submit" class="modal-submit" id="modal-submit-activity"><span class="material-symbols-outlined">add</span>Add</button>
                         </div>
                     </form>
                 </div>
             </div>
         </section>
     </div>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>

@@ -82,10 +82,32 @@
     font-size: 15px;
     margin-bottom: 8px;
     text-align: center;
+    width: 30%;
+}
+.auth-successful {
+    color: #22c55e;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 15px;
+    margin-bottom: 8px;
+    text-align: center;
+    width: 30%;
+}
+
+.hidden{
+    display: none;
 }
 
 @media screen and (min-width: 780px) {
     .auth-section form{
         width: 30%;
+    }
+}
+
+@media  screen and (max-width: 780px) {
+    .auth-error, .auth-successful{
+        width: 230px;
     }
 }

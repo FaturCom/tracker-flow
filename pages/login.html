@@ -11,7 +11,8 @@
 <body>
     <section class="auth-section">
         <h1 class="auth-header"><span class="material-symbols-outlined">calendar_check</span>TRACK-FLOW</h1>
-        <form>
+        <p id="auth-message-login" class="hidden">Confirmation password must be the same</p>
+        <form id="formLogin">
             <label for="login-username" class="auth-label">Username:</label><br>
             <input type="text" id="login-username" class="auth-input"><br>
             <label for="login-password" class="auth-label">Password:</label><br>
@@ -20,5 +21,6 @@
             <p class="auth-text">Don't have an account? <a href="register.html">sign up</a></p>
         </form>
     </section>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>

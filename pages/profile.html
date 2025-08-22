@@ -60,6 +60,38 @@
                     </div>
                 </div>             
             </main>
+            
+            <!-- modal view password -->
+            <div class="modal-view hidden">
+                <div class="modal-content" id="modal-changePassword">
+                    <h2>Change Password</h2>
+                    <form>
+                        <label for="changePassword"> new password:</label><br>
+                        <input type="text" id="changePassword" name="change password" required><br>
+                        <label for="passwordConfirm">confirm password:</label><br>
+                        <input type="text" id="passwordConfirm" name="confirm password" required><br>
+                        <div class="modal-actions">
+                            <button type="button" class="modal-close" id="modal-close-changePaswword"><span class="material-symbols-outlined">Close</span>Cancel</button>
+                            <button type="submit" class="modal-submit" id="modal-submit-changePaswword"><span class="material-symbols-outlined">edit</span>Change</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- modal view username -->
+            <div class="modal-view hidden">
+                <div class="modal-content" id="modal-changeUsername">
+                    <h2>Change Username</h2>
+                    <form>
+                        <label for="changeUsername">new username:</label><br>
+                        <input type="text" id="changeUsername" name="change username" required><br>
+                        <div class="modal-actions">
+                            <button type="button" class="modal-close" id="modal-close-changeUsername"><span class="material-symbols-outlined">Close</span>Cancel</button>
+                            <button type="submit" class="modal-submit" id="modal-submit-changeUsername"><span class="material-symbols-outlined">edit</span>Change</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </section>
     </div>
 </body>

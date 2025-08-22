@@ -11,16 +11,18 @@
 <body>
     <section class="auth-section">
         <h1 class="auth-header"><span class="material-symbols-outlined">calendar_check</span>TRACK-FLOW</h1>
-        <form>
+        <p id="auth-message-register" class="hidden">Confirmation password must be the same</p>
+        <form id="formRegister">
             <label for="register-username" class="auth-label">Username:</label><br>
             <input type="text" id="register-username" class="auth-input"><br>
             <label for="register-password" class="auth-label">Password:</label><br>
             <input type="password" id="register-password" class="auth-input"><br>
-            <label for="register-password-confirm" class="auth-label">Konfirmasi Password:</label><br>
+            <label for="register-password-confirm" class="auth-label">Confirm Password:</label><br>
             <input type="password" id="register-password-confirm" class="auth-input"><br>
             <button type="submit" id="register-submit" class="auth-btn">Login</button>
             <p class="auth-text">Already have an account? <a href="login.html">sign in</a></p>
         </form>
     </section>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>

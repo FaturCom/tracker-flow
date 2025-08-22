@@ -281,11 +281,17 @@ input[type="checkbox"]{
     min-width: 320px;
     max-width: 90vw;
     width: 400px;
+    min-height: 180px;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.4rem;
     animation: modalFadeIn 0.2s;
+}
+
+.modal-logout{
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes modalFadeIn {
@@ -321,13 +327,14 @@ input[type="checkbox"]{
     color: white;
     font-weight: bold;
     padding: 6px;
+    border-radius: 5px;
 }
 
-#modal-submit{
+.modal-submit{
     background-color: rgb(0, 202, 0);
 }
 
-#modal-close{
+.modal-close{
     background-color: red;
 }
 
