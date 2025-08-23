@@ -1,10 +1,14 @@
-// membuat id baru
+// utils/helper.js
 export function generateId() {
-  return Date.now().toString() + Math.floor(Math.random() * 1000).toString();
+    return 'user_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
 }
 
-// mengambil waktu sekarang
 export function getCurrentDate() {
-  return new Date().toISOString();
+    return new Date().toISOString();
 }
 
+// Untuk future validation
+export function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}

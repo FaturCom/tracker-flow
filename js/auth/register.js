@@ -1,31 +1,36 @@
-import { generateId, getCurrentDate } from "../utils/helper.js";
-import { addData, getData } from "../utils/storage.js";
+// auth/register.js
+import { StorageService } from '../services/storageService.js';
 
-export function registerUserHandler(username, password, confirmPassword){
-    const data = getData('users').find(user => user.username == username)
+export function registerUserHandler(username, password, confirmPassword) {
+    try {
+        // Validasi form
+        if (!username || !password || !confirmPassword) {
+            return { status: false, message: "Harap isi semua field" };
+        }
 
-    if(username == "" || password == "" || confirmPassword == ""){
-        return {status: false, message: "please fill in the form correctly"}
+        if (password !== confirmPassword) {
+            return { status: false, message: "Konfirmasi password harus sama" };
+        }
+
+        // Business logic dipindahkan ke StorageService
+        const newUser = StorageService.saveUser({
+            username: username.trim(),
+            password: password
+        });
+
+        // Set user sebagai logged in
+        StorageService.setCurrentUser(newUser.id);
+
+        return {
+            status: true, 
+            message: "Akun berhasil dibuat",
+            user: newUser
+        };
+
+    } catch (error) {
+        return { 
+            status: false, 
+            message: error.message 
+        };
     }
-
-    if(data){
-        return {status: false, message: `username "${username}" is already in use`}
-    }
-
-    if(password.length < 6){
-        return {status:false, message: "password minimum 6 characters"}
-    }
-
-    if(password !== confirmPassword){
-        return {status: false, message:"confirmation password must be the same"}
-    }
-
-    const newUser = {
-        id: generateId(),
-        username,
-        password,
-        createdAt: getCurrentDate()
-    }
-    addData('users', newUser)
-    return {status: true, message: "successfully created an account"}
 }

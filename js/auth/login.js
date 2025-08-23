@@ -1,22 +1,29 @@
-import { setCurrentUser, getData } from "../utils/storage.js"
+// auth/login.js
+import { StorageService } from '../services/storageService.js';
 
-export function loginUserHandler(username, password){
-    const users = getData('users')
+export function loginUserHandler(username, password) {
+    try {
+        // Validasi form
+        if (!username || !password) {
+            return { status: false, message: "Harap isi semua field" };
+        }
 
-    const user = users.find(user => user.username == username)
+        // Business logic dipindahkan ke StorageService
+        const user = StorageService.validateLogin(username, password);
+        
+        // Set user sebagai logged in
+        StorageService.setCurrentUser(user.id);
 
-    if(username == "" || password == ""){
-        return {status: false, message: "please fill in the form correctly"}
+        return { 
+            status: true, 
+            message: "Login berhasil",
+            user: user
+        };
+
+    } catch (error) {
+        return { 
+            status: false, 
+            message: error.message 
+        };
     }
-
-    if(!user){
-        return {status: false, message: "username not found"}
-    }
-
-    if(user.password !== password){
-        return {status: false, message: "wrong password"}
-    }
-
-    setCurrentUser(user.id)
-    return {status: true, message: "login successful"}
 }
