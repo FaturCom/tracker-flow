@@ -1,5 +1,6 @@
 import { registerUserHandler } from "./auth/register.js";
 import { loginUserHandler } from "./auth/login.js";
+import { Tracker } from "./modules/tracker.js";
 
 // halaman register
 if(document.getElementById('formRegister')){
@@ -56,3 +57,68 @@ if(document.getElementById('formLogin')){
     })
 }
 
+// halaman tracker
+if(document.querySelector('.activity-table')){
+    const activityTableBody = document.querySelector('.activity-tbody');
+    const activities = Tracker.showActivity();
+
+    if(activities.length == 0){
+        document.querySelector(".no-activity").classList.remove("hidden");
+    }else{
+        document.querySelector(".no-activity").classList.add("hidden");
+        activities.forEach(activity => {
+            const row = document.createElement('tr');
+            row.setAttribute('data-id', activity.id);
+            row.innerHTML = `
+                <td>${activity.name}</td>
+                <td>${activity.weeklyTarget}x</td>
+                <td><input type="checkbox"></td>
+                <td><input type="checkbox"></td>
+                <td><input type="checkbox"></td>
+                <td><input type="checkbox"></td>
+                <td><input type="checkbox"></td>
+                <td><input type="checkbox"></td>
+                <td><input type="checkbox"></td>
+                <td>0%</td>
+                <td class="activity-actions">
+                    <button class="activity-actions-edit"><span class="material-symbols-outlined">edit</span></button>
+                    <button class="activity-actions-delete"><span class="material-symbols-outlined">delete</span></button>
+                </td>
+            `;
+            activityTableBody.appendChild(row);
+        });
+    }
+}
+
+if(document.getElementById("add-button")){
+    const buttonAdd = document.getElementById("add-button");
+    const modalTracker = document.querySelector(".modal-view");
+    const formAddActivity = document.getElementById("activity-form");
+
+    buttonAdd.addEventListener("click", () => {
+        modalTracker.classList.remove("hidden");
+    });
+
+    
+    formAddActivity.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const nameActivity = document.getElementById("activityName").value;
+        const targetActivity = parseInt(document.getElementById("WeeklyTarget").value);
+        const result = Tracker.addActivity({name: nameActivity, weeklyTarget: targetActivity});
+        if(result.status == false){
+            console.log(result.message);
+        }else{
+            console.log(result.message);
+            modalTracker.classList.add("hidden");
+            formAddActivity.reset();
+            location.reload();
+        }
+    });
+
+    const buttonClose = document.getElementById("modal-close-activity");
+    buttonClose.addEventListener("click", () => {
+        modalTracker.classList.add("hidden");
+        formAddActivity.reset();
+    });
+
+}

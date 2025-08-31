@@ -1,6 +1,6 @@
 // services/storageService.js
 import { storageHandler } from '../utils/storage.js';
-import { generateId, getCurrentDate } from '../utils/helper.js';
+import { Helper } from '../utils/helper.js';
 
 export class StorageService {
     // USER METHODS
@@ -29,8 +29,8 @@ export class StorageService {
         // Business Logic: tambah metadata
         const newUser = {
             ...user,
-            id: generateId(),
-            createdAt: getCurrentDate(),
+            id: Helper.generateId('user'),
+            createdAt: Helper.getCurrentDate(),
             lastLogin: null
         };
         
@@ -52,7 +52,7 @@ export class StorageService {
         }
         
         // Update last login
-        user.lastLogin = getCurrentDate();
+        user.lastLogin = Helper.getCurrentDate();
         this.updateUser(user);
         
         return user;
@@ -73,6 +73,11 @@ export class StorageService {
         return users.find(user => user.id === userId);
     }
 
+    static getUserId(){
+        const currentUser = localStorage.getItem('currentUser');
+        return currentUser ? currentUser : null;
+    }
+
     // Untuk future use
     static setCurrentUser(userId) {
         localStorage.setItem('currentUser', userId);
@@ -81,5 +86,48 @@ export class StorageService {
     static getCurrentUser() {
         const userId = localStorage.getItem('currentUser');
         return userId ? this.getUserById(userId) : null;
+    }
+
+    // ACTIVITY METHODS
+    static getActivities() {
+        return storageHandler.getData('activities');
+    }
+
+    static createNewActivity(activityData) {
+        const activities = this.getActivities();
+
+        const newActivity = {
+            ...activityData,
+            id: Helper.generateId(this.getUserId()),
+            userId : this.getUserId(),
+            createdAt: Helper.getCurrentDate()
+        }
+
+        activities.push(newActivity);
+        storageHandler.saveData('activities', activities);
+    }
+
+    static updateActivity(activityId, updatedData) {
+        const activities = this.getActivities();
+        const index = activities.findIndex(activity => activity.id === activityId);
+        
+        if (index !== -1) {
+            activities[index] = { ...activities[index], ...updatedData };
+            storageHandler.saveData('activities', activities);
+        } else {
+            throw new Error('Activity not found');
+        }
+    }
+
+    static deleteActivity(activityId) {
+        let activities = this.getActivities();
+        activities = activities.filter(activity => activity.id !== activityId);
+        storageHandler.saveData('activities', activities);
+    }
+
+    static getActivitiesByUser() {
+        const activities = this.getActivities();
+        const userId = this.getUserId();
+        return activities.filter(activity => activity.userId === userId);
     }
 }

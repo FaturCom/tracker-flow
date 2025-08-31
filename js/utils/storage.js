@@ -14,23 +14,14 @@ export class storageHandler {
     
     // Tambah data/item baru ke localStorage
     static addData(key, item){
-        const data = getData(key)
+        const data =this.getData(key)
         data.push(item)
         saveData(key, data)
     }
     // Fungsi untuk hapus item/data
     static deleteData(key, predicate){
-        let data = getData(key)
+        let data = this.getData(key)
         data.filter(item => !predicate(item))
         saveData(key, data)
-    }
-    
-    // Fungsi untuk current user
-    static setCurrentUser(id){
-        localStorage.setItem('currentUser', JSON.stringify(id))
-    }
-    
-    static getCurrentUser(){
-        return localStorage.getItem('currentUser')
     }
 }
