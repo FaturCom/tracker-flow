@@ -123,11 +123,20 @@ export class StorageService {
         let activities = this.getActivities();
         activities = activities.filter(activity => activity.id !== activityId);
         storageHandler.saveData('activities', activities);
+        return true;
     }
 
     static getActivitiesByUser() {
         const activities = this.getActivities();
         const userId = this.getUserId();
         return activities.filter(activity => activity.userId === userId);
+    }
+
+    // MAIN MESSAGE METHODS
+    static setMainMessage(message){
+        localStorage.setItem('mainMessage', message? JSON.stringify(message) : '');
+    }
+    static getMainMessage(){
+        return localStorage.getItem('mainMessage') ? JSON.parse(localStorage.getItem('mainMessage')) : null;
     }
 }

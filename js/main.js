@@ -91,38 +91,78 @@ if(document.querySelector('.activity-table')){
 }
 
 // modal events
-const formAddActivity = document.getElementById("activity-form");
 let currentActions = "add";
 let currentActivityId = null;
 let oldData = null;
 
-formAddActivity.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const nameActivity = document.getElementById("activityName").value;
-    const targetActivity = parseInt(document.getElementById("WeeklyTarget").value);
+if(document.getElementById("activity-form")){
+    const formAddActivity = document.getElementById("activity-form");
 
-    if(currentActions == "add"){
-        const result = Tracker.addActivity({name: nameActivity, weeklyTarget: targetActivity});
-        if(result.status == false){
-            console.log(result.message);
-        }else{
-            console.log(result.message);
-            document.querySelector(".modal-view").classList.add("hidden");
-            formAddActivity.reset();
-            location.reload();
+    formAddActivity.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const nameActivity = document.getElementById("activityName").value;
+        const targetActivity = parseInt(document.getElementById("WeeklyTarget").value);
+        const modalMessage = document.getElementById("modal-message");
+    
+        if(currentActions == "add"){
+            const result = Tracker.addActivity({name: nameActivity, weeklyTarget: targetActivity});
+            if(result.status == false){
+                modalMessage.textContent = result.message;
+                modalMessage.classList.add("error-message")
+            }else{
+                Tracker.setMainMessage(result);
+                document.querySelector(".modal-view").classList.add("hidden");
+                formAddActivity.reset();
+                location.reload();
+            }
+        }else if(currentActions == "edit"){
+            const result = Tracker.editActivity(currentActivityId, {name: nameActivity, weeklyTarget: targetActivity}, oldData);
+            if(result.status == false){
+                modalMessage.textContent = result.message;
+                modalMessage.classList.add("error-message")
+            }else{
+                Tracker.setMainMessage(result);
+                document.querySelector(".modal-view").classList.add("hidden");
+                formAddActivity.reset();
+                location.reload();
+            }
+        }else if(currentActions == "delete"){
+            const result = Tracker.removeActivity(currentActivityId);
+            if(result.status == false){
+                modalMessage.textContent = result.message;
+                modalMessage.classList.add("error-message")
+            }else{
+                Tracker.setMainMessage(result);
+                document.querySelector(".modal-view").classList.add("hidden");
+                formAddActivity.reset();
+                location.reload();
+            }
         }
-    }else if(currentActions == "edit"){
-        const result = Tracker.editActivity(currentActivityId, {name: nameActivity, weeklyTarget: targetActivity}, oldData);
-        if(result.status == false){
-            console.log(result.message);
-        }else{
-            console.log(result.message);
-            document.querySelector(".modal-view").classList.add("hidden");
-            formAddActivity.reset();
-            location.reload();
-        }
+    });
+}
+
+
+// main message
+if(document.getElementById("main-message-container")){
+    const mainContainerMessage = document.getElementById("main-message-container");
+    const mainMessage = document.getElementById("main-message");
+    const resultMainMessage = Tracker.getMainMessage();
+
+    if(resultMainMessage){
+        mainContainerMessage.classList.remove("hidden");
+        mainMessage.classList.remove("error-message");
+        mainMessage.classList.add("successful-message");
+        mainMessage.textContent = resultMainMessage.message;
+
+        setTimeout(() => {
+        mainContainerMessage.classList.add("hidden");
+        mainMessage.classList.add("error-message");
+        mainMessage.classList.remove("successful-message");
+        mainMessage.textContent = resultMainMessage.message;
+        Tracker.setMainMessage(null);
+        }, 3000)
     }
-});
+}
 
 // open modal add activity
 if(document.getElementById("add-button")){
@@ -130,9 +170,14 @@ if(document.getElementById("add-button")){
     const modalTracker = document.querySelector(".modal-view");
     const formAddActivity = document.getElementById("activity-form");
     const modalAddButton = document.getElementById("modal-submit-activity")
+    const modalMessage = document.getElementById("modal-message");
+    modalMessage.textContent = "";
+    modalMessage.classList.remove("error-message");
     
     buttonAdd.addEventListener("click", () => {
         modalTracker.classList.remove("hidden");
+        formAddActivity.querySelectorAll("input, label").forEach(el => el.classList.remove("hidden"));
+        document.querySelector(".modal-actions").classList.remove("modal-logout");
         modalTracker.querySelector("h2").textContent = "Add New Activity";
         modalAddButton.innerHTML = `<span class="material-symbols-outlined">add</span>Add activity`;
         modalAddButton.classList.remove("modal-edit");
@@ -144,6 +189,8 @@ if(document.getElementById("add-button")){
     const buttonClose = document.getElementById("modal-close-activity");
     buttonClose.addEventListener("click", () => {
         modalTracker.classList.add("hidden");
+        modalMessage.textContent = "";
+        modalMessage.classList.remove("error-message");
         formAddActivity.reset();
     });
 
@@ -161,12 +208,17 @@ if(document.querySelectorAll(".activity-actions-edit")){
             const modalTracker = document.querySelector(".modal-view");
             const formAddActivity = document.getElementById("activity-form");
             const modalEditButton = document.getElementById("modal-submit-activity")
+            const modalMessage = document.getElementById("modal-message");
+            modalMessage.textContent = "";
+            modalMessage.classList.remove("error-message");
 
             modalTracker.classList.remove("hidden");
+            formAddActivity.querySelectorAll("input, label").forEach(el => el.classList.remove("hidden"));
+            document.querySelector(".modal-actions").classList.remove("modal-logout");
             modalTracker.querySelector("h2").textContent = "Edit Activity";
             modalEditButton.innerHTML = `<span class="material-symbols-outlined">edit</span>Edit activity`;
             modalEditButton.classList.add("modal-edit");
-            modalEditButton.classList.remove("modal-add");
+            modalEditButton.classList.remove("modal-add", "modal-delete");
             const odlNameActivity = document.getElementById("activityName").value = activityName;
             const oldTargetActivity = document.getElementById("WeeklyTarget").value = activityTarget;
 
@@ -177,9 +229,10 @@ if(document.querySelectorAll(".activity-actions-edit")){
             const buttonClose = document.getElementById("modal-close-activity");
             buttonClose.addEventListener("click", () => {
                 modalTracker.classList.add("hidden");
+                modalMessage.textContent = "";
+                modalMessage.classList.remove("error-message");
                 formAddActivity.reset();
-            }
-            );
+            });
         })
     })
 }
@@ -187,6 +240,33 @@ if(document.querySelectorAll(".activity-actions-edit")){
 if(document.querySelectorAll(".activity-actions-delete")){
     const deleteButtons = document.querySelectorAll(".activity-actions-delete");
     deleteButtons.forEach(button => {
-        button.addEventListener('click', e => {})
+        button.addEventListener('click', e => {
+            const activityRow = e.currentTarget.closest('tr')
+            const modalDeleteButton = document.getElementById("modal-submit-activity");
+            const formAddActivity = document.getElementById("activity-form");
+            const modalTracker = document.querySelector(".modal-view");
+            const modalMessage = document.getElementById("modal-message");
+            modalMessage.textContent = "";
+            modalMessage.classList.remove("error-message");
+
+            modalTracker.classList.remove("hidden");
+            formAddActivity.querySelectorAll("input, label").forEach(el => el.classList.add("hidden"));
+            document.querySelector(".modal-actions").classList.add("modal-logout");
+            modalDeleteButton.innerHTML = `<span class="material-symbols-outlined">delete</span>Delete activity`;
+            modalDeleteButton.classList.add("modal-delete");
+            modalDeleteButton.classList.remove("modal-add", "modal-edit");
+
+            modalTracker.querySelector("h2").textContent = "Delete Activity?";
+            currentActions = "delete";
+            currentActivityId = activityRow.getAttribute('data-id');
+
+            const buttonClose = document.getElementById("modal-close-activity");
+            buttonClose.addEventListener("click", () => {
+                modalTracker.classList.add("hidden");
+                modalMessage.textContent = "";
+                modalMessage.classList.remove("error-message");
+                formAddActivity.reset();
+            });
+        })
     })
 }

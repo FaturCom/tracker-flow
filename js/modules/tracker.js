@@ -49,7 +49,20 @@ export class Tracker {
     }
 
     static removeActivity(activityId){
-        StorageService.deleteActivity(activityId);
-        return {status: true, message: "Aktivitas berhasil dihapus"};
+        const result = StorageService.deleteActivity(activityId);
+
+        if(result){
+            return {status: true, message: "Aktivitas berhasil dihapus"};
+        }else{
+            return {status: false, message: "Aktivitas gagal dihapus"};
+        }
+    }
+
+    static setMainMessage(message){
+        StorageService.setMainMessage(message);
+    }
+
+    static getMainMessage(){
+        return StorageService.getMainMessage();
     }
 }

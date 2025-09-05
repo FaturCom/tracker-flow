@@ -334,6 +334,31 @@ input[type="checkbox"]{
     gap: 4px;
 }
 
+.error-message {
+    color: #ef4444;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 15px;
+    margin-bottom: 8px;
+    text-align: center;
+    width: 100%;
+}
+
+.successful-message {
+    color: #22c55e;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 15px;
+    margin-top: 1.6rem;
+    text-align: center;
+    justify-self: center;
+    width: 90%;
+}
+
 .modal-content button{
     display: flex;
     align-items: center;
@@ -353,8 +378,13 @@ input[type="checkbox"]{
     transition: all 0.3s;
 }
 
-.modal-close{
+.modal-delete{
     background-color: red;
+    transition: all 0.3s;
+}
+
+.modal-close{
+    background-color: gray;
     transition: all 0.3s;
 }
 
@@ -362,7 +392,7 @@ input[type="checkbox"]{
     font-weight: bold;
 }
 
-.modal-submit:active, .modal-close:active{
+.modal-submit:active, .modal-close:active, .modal-edit:active, .modal-delete:active{
     transform: scale(0.95);
 }
 
