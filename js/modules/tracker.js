@@ -34,10 +34,10 @@ export class Tracker {
             if(isNaN(newData.weeklyTarget) || newData.weeklyTarget <= 0){
                 return {status: false, message: "Target mingguan harus berupa angka lebih dari 0"}
             }
-            if(newActivity.weeklyTarget > 7){
+            if(newData.weeklyTarget > 7){
             return {status: false, message: "Target mingguan tidak boleh lebih dari 7"};
             }
-            if(newData.name == oldData.name || newData.weeklyTarget == oldData.weeklyTarget){
+            if(newData.name == oldData.name && newData.weeklyTarget == oldData.weeklyTarget){
                 return {status: false, message: "Tidak ada perubahan aktivitas"};
             }
     

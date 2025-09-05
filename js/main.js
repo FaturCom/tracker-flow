@@ -70,8 +70,8 @@ if(document.querySelector('.activity-table')){
             const row = document.createElement('tr');
             row.setAttribute('data-id', activity.id);
             row.innerHTML = `
-                <td>${activity.name}</td>
-                <td>${activity.weeklyTarget}x</td>
+                <td data-name="${activity.name}">${activity.name}</td>
+                <td data-weeklyTarget="${activity.weeklyTarget}">${activity.weeklyTarget}x</td>
                 <td><input type="checkbox"></td>
                 <td><input type="checkbox"></td>
                 <td><input type="checkbox"></td>
@@ -90,29 +90,55 @@ if(document.querySelector('.activity-table')){
     }
 }
 
-if(document.getElementById("add-button")){
-    const buttonAdd = document.getElementById("add-button");
-    const modalTracker = document.querySelector(".modal-view");
-    const formAddActivity = document.getElementById("activity-form");
+// modal events
+const formAddActivity = document.getElementById("activity-form");
+let currentActions = "add";
+let currentActivityId = null;
+let oldData = null;
 
-    buttonAdd.addEventListener("click", () => {
-        modalTracker.classList.remove("hidden");
-    });
+formAddActivity.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nameActivity = document.getElementById("activityName").value;
+    const targetActivity = parseInt(document.getElementById("WeeklyTarget").value);
 
-    
-    formAddActivity.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const nameActivity = document.getElementById("activityName").value;
-        const targetActivity = parseInt(document.getElementById("WeeklyTarget").value);
+    if(currentActions == "add"){
         const result = Tracker.addActivity({name: nameActivity, weeklyTarget: targetActivity});
         if(result.status == false){
             console.log(result.message);
         }else{
             console.log(result.message);
-            modalTracker.classList.add("hidden");
+            document.querySelector(".modal-view").classList.add("hidden");
             formAddActivity.reset();
             location.reload();
         }
+    }else if(currentActions == "edit"){
+        const result = Tracker.editActivity(currentActivityId, {name: nameActivity, weeklyTarget: targetActivity}, oldData);
+        if(result.status == false){
+            console.log(result.message);
+        }else{
+            console.log(result.message);
+            document.querySelector(".modal-view").classList.add("hidden");
+            formAddActivity.reset();
+            location.reload();
+        }
+    }
+});
+
+// open modal add activity
+if(document.getElementById("add-button")){
+    const buttonAdd = document.getElementById("add-button");
+    const modalTracker = document.querySelector(".modal-view");
+    const formAddActivity = document.getElementById("activity-form");
+    const modalAddButton = document.getElementById("modal-submit-activity")
+    
+    buttonAdd.addEventListener("click", () => {
+        modalTracker.classList.remove("hidden");
+        modalTracker.querySelector("h2").textContent = "Add New Activity";
+        modalAddButton.innerHTML = `<span class="material-symbols-outlined">add</span>Add activity`;
+        modalAddButton.classList.remove("modal-edit");
+        modalAddButton.classList.add("modal-add");
+        currentActions = "add";
+        currentActivityId = null;
     });
 
     const buttonClose = document.getElementById("modal-close-activity");
@@ -121,4 +147,46 @@ if(document.getElementById("add-button")){
         formAddActivity.reset();
     });
 
+}
+
+// open modal edit activity
+if(document.querySelectorAll(".activity-actions-edit")){
+    const editButtons = document.querySelectorAll(".activity-actions-edit");
+    editButtons.forEach(button => {
+        button.addEventListener('click', e => {
+            const activityRow = e.currentTarget.closest('tr')
+            const activityName = activityRow.querySelector('td[data-name]').getAttribute('data-name');
+            const activityTarget = activityRow.querySelector('td[data-weeklyTarget]').getAttribute('data-weeklyTarget');
+            
+            const modalTracker = document.querySelector(".modal-view");
+            const formAddActivity = document.getElementById("activity-form");
+            const modalEditButton = document.getElementById("modal-submit-activity")
+
+            modalTracker.classList.remove("hidden");
+            modalTracker.querySelector("h2").textContent = "Edit Activity";
+            modalEditButton.innerHTML = `<span class="material-symbols-outlined">edit</span>Edit activity`;
+            modalEditButton.classList.add("modal-edit");
+            modalEditButton.classList.remove("modal-add");
+            const odlNameActivity = document.getElementById("activityName").value = activityName;
+            const oldTargetActivity = document.getElementById("WeeklyTarget").value = activityTarget;
+
+            oldData = {name: activityName, weeklyTarget: parseInt(activityTarget)};
+            currentActions = "edit";
+            currentActivityId = activityRow.getAttribute('data-id');
+
+            const buttonClose = document.getElementById("modal-close-activity");
+            buttonClose.addEventListener("click", () => {
+                modalTracker.classList.add("hidden");
+                formAddActivity.reset();
+            }
+            );
+        })
+    })
+}
+
+if(document.querySelectorAll(".activity-actions-delete")){
+    const deleteButtons = document.querySelectorAll(".activity-actions-delete");
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', e => {})
+    })
 }

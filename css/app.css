@@ -348,6 +348,11 @@ input[type="checkbox"]{
     transition: all 0.3s;
 }
 
+.modal-edit{
+    background-color: #6397f1;
+    transition: all 0.3s;
+}
+
 .modal-close{
     background-color: red;
     transition: all 0.3s;
