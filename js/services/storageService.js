@@ -105,6 +105,7 @@ export class StorageService {
 
         activities.push(newActivity);
         storageHandler.saveData('activities', activities);
+        this.saveLogsActivity({activityId: newActivity.id});
     }
 
     static updateActivity(activityId, updatedData) {
@@ -138,5 +139,50 @@ export class StorageService {
     }
     static getMainMessage(){
         return localStorage.getItem('mainMessage') ? JSON.parse(localStorage.getItem('mainMessage')) : null;
+    }
+
+    // ACTIVITYLOGS/HISTORY METHODS
+    static getActivityLogs() {
+        return storageHandler.getData('activityLogs');
+    }
+
+    static saveLogsActivity(log) {
+        const logs = this.getActivityLogs();
+        const newLog = {
+            ...log,
+            id: Helper.generateId('log'),
+            weekStart: Helper.weekRange()[0],
+            weekEnd: Helper.weekRange()[6],
+            checks: {
+                monday: false,
+                tuesday: false,
+                wednesday: false,
+                thursday: false,
+                friday: false,
+                saturday: false,
+                sunday: false
+            },
+            progress : 0
+        }
+
+        logs.push(newLog);
+        storageHandler.saveData('activityLogs', logs);
+    }
+
+    static uppdateLogActivity(logId, updartedLog){
+        const logs = this.getActivityLogs();
+        const indexLog = logs.findIndex(log => log.id === logId);
+
+        if(indexLog !== -1){
+            logs[indexLog] = {...logs[indexLog], ...updartedLog};
+            storageHandler.saveData('activityLogs', logs)
+        }else{
+            throw new Error('Log activity not found');
+        }
+    }
+
+    static getLogsByActivityId(activityId){
+        const logs = this.getActivityLogs();
+        return logs.filter(log => log.activityId === activityId);
     }
 }

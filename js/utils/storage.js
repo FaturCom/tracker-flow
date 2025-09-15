@@ -16,12 +16,12 @@ export class storageHandler {
     static addData(key, item){
         const data =this.getData(key)
         data.push(item)
-        saveData(key, data)
+        this.saveData(key, data)
     }
     // Fungsi untuk hapus item/data
     static deleteData(key, predicate){
         let data = this.getData(key)
         data.filter(item => !predicate(item))
-        saveData(key, data)
+        this.saveData(key, data)
     }
 }

@@ -1,4 +1,5 @@
 import { StorageService } from "../services/storageService.js";
+import { Helper } from "../utils/helper.js";
 
 export class Tracker {
     static showActivity() {
@@ -64,5 +65,30 @@ export class Tracker {
 
     static getMainMessage(){
         return StorageService.getMainMessage();
+    }
+
+    static getCurrentUser(){
+        return StorageService.getCurrentUser()
+    }
+
+    static getLogForThisWeek(activityId){
+        const logs = StorageService.getLogsByActivityId(activityId);
+        const thisWeek = Helper.weekRange();
+        let log =  logs.find(log => log.weekStart === thisWeek[0]);
+        if(!log){
+            log = StorageService.saveLogsActivity({activityId})
+        }
+        return log
+    }
+
+    static toggleDay(activityId, weeklyTarget, day){
+        const log = this.getLogForThisWeek(activityId);
+
+        const updateChecks = {...log.checks, [day] : !log.checks[day]};
+        const progress = Math.floor(Object.values(updateChecks).filter(v => v).length/weeklyTarget * 100);
+        const updateLog = {...log, checks: updateChecks, progress};
+        
+        StorageService.uppdateLogActivity(log.id, updateLog);
+        return updateLog
     }
 }

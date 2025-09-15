@@ -1,6 +1,7 @@
 import { registerUserHandler } from "./auth/register.js";
 import { loginUserHandler } from "./auth/login.js";
 import { Tracker } from "./modules/tracker.js";
+import { Helper } from "./utils/helper.js";
 
 // halaman register
 if(document.getElementById('formRegister')){
@@ -58,28 +59,38 @@ if(document.getElementById('formLogin')){
 }
 
 // halaman tracker
+if(document.getElementById('activity-week')){
+    const week = Helper.weekRange()
+    const weekStart = new Date(week[0])
+    const weekEnd = new Date(week[6])
+    const options = {month: 'long', day: 'numeric', year: 'numeric'};
+    document.getElementById('activity-week').textContent = `Week: ${weekStart.toLocaleDateString('en-US', options)} - ${weekEnd.toLocaleDateString('en-US', options)}`
+}
+
+
 if(document.querySelector('.activity-table')){
     const activityTableBody = document.querySelector('.activity-tbody');
     const activities = Tracker.showActivity();
-
+    
     if(activities.length == 0){
         document.querySelector(".no-activity").classList.remove("hidden");
     }else{
         document.querySelector(".no-activity").classList.add("hidden");
         activities.forEach(activity => {
+            const log = Tracker.getLogForThisWeek(activity.id)
             const row = document.createElement('tr');
             row.setAttribute('data-id', activity.id);
             row.innerHTML = `
                 <td data-name="${activity.name}">${activity.name}</td>
                 <td data-weeklyTarget="${activity.weeklyTarget}">${activity.weeklyTarget}x</td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td>0%</td>
+                <td><input type="checkbox" data-check="monday" ${log.checks.monday ? "checked" : ""}></td>
+                <td><input type="checkbox" data-check="tuesday" ${log.checks.tuesday ? "checked" : ""}></td>
+                <td><input type="checkbox" data-check="wednesday" ${log.checks.wednesday ? "checked" : ""}></td>
+                <td><input type="checkbox" data-check="thursday" ${log.checks.thursday ? "checked" : ""}></td>
+                <td><input type="checkbox" data-check="friday" ${log.checks.friday ? "checked" : ""}></td>
+                <td><input type="checkbox" data-check="saturday" ${log.checks.saturday ? "checked" : ""}></td>
+                <td><input type="checkbox" data-check="sunday" ${log.checks.sunday ? "checked" : ""}></td>
+                <td>${log.progress}%</td>
                 <td class="activity-actions">
                     <button class="activity-actions-edit"><span class="material-symbols-outlined">edit</span></button>
                     <button class="activity-actions-delete"><span class="material-symbols-outlined">delete</span></button>
@@ -88,6 +99,20 @@ if(document.querySelector('.activity-table')){
             activityTableBody.appendChild(row);
         });
     }
+}
+
+if(document.querySelector('.activity-tbody')){
+    document.querySelector('.activity-tbody').addEventListener('change', (e) => {
+        if(e.target && e.target.matches("input[type='checkbox']")){
+            const activityRow = e.target.closest('tr');
+            const activityId = activityRow.getAttribute('data-id');
+            const activityTarget = activityRow.querySelector('td[data-weeklyTarget]').getAttribute('data-weeklyTarget');
+            const day = e.target.getAttribute('data-check');
+
+            const result = Tracker.toggleDay(activityId, activityTarget, day);
+            location.reload();
+        }
+    })
 }
 
 // modal events
