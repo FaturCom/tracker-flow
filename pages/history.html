@@ -39,11 +39,11 @@
 
             <main>
                 <div class="tracker-header">
-                    <p>Week: August 14th 2025 - August 21st 2025</p>
+                    <p id="week1"></p>
                 </div>
 
                 <!-- tabel -->  
-                <table class="activity-table">
+                <table class="activity-table" id="activity-table-lastWeek">
                     <thead class="activity-thead">
                         <tr>
                             <th>Activity</th>
@@ -59,63 +59,19 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="activity-tbody">
-                        <tr>
-                            <td>Coding</td>
-                            <td>4x</td>
-                            <td><input type="checkbox" class="green" checked disabled></td>
-                            <td><input type="checkbox" checked disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td>0%</td>
-                            <td>
-                                <button class="activity-actions-edit disable-button"><span class="material-symbols-outlined">edit</span></button>
-                                <button class="activity-actions-delete disable-button"><span class="material-symbols-outlined">delete</span></button>
-                            </td>
+                    <tbody class="activity-tbody" id="activity-tbody-lastWeek">
+                        <tr aria-colspan="11" class="no-activity-history1 hidden">
+                            <td colspan="11">No activities yet</td>
                         </tr>
-                        <tr>
-                            <td>Coding</td>
-                            <td>4x</td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td>0%</td>
-                            <td>
-                                <button class="activity-actions-edit disable-button"><span class="material-symbols-outlined">edit</span></button>
-                                <button class="activity-actions-delete disable-button"><span class="material-symbols-outlined">delete</span></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Coding</td>
-                            <td>4x</td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td>0%</td>
-                            <td>
-                                <button class="activity-actions-edit disable-button"><span class="material-symbols-outlined">edit</span></button>
-                                <button class="activity-actions-delete disable-button"><span class="material-symbols-outlined">delete</span></button>
-                            </td>
-                        </tr>
+                        <!-- rows will be added here dynamically -->
                     </tbody>
                 </table>
                 <div class="tracker-header">
-                    <p>Week: August 14th 2025 - August 21st 2025</p>
+                    <p id="week2"></p>
                 </div>
 
                 <!-- tabel -->  
-                <table class="activity-table">
+                <table class="activity-table" id="activity-table-twoWeeksAgo">
                     <thead class="activity-thead">
                         <tr>
                             <th>Activity</th>
@@ -131,60 +87,16 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="activity-tbody">
-                        <tr>
-                            <td>Coding</td>
-                            <td>4x</td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td>0%</td>
-                            <td>
-                                <button class="activity-actions-edit disable-button"><span class="material-symbols-outlined">edit</span></button>
-                                <button class="activity-actions-delete disable-button"><span class="material-symbols-outlined">delete</span></button>
-                            </td>
+                    <tbody class="activity-tbody" id="activity-tbody-twoWeeksAgo">
+                        <tr aria-colspan="11" class="no-activity-history2 hidden">
+                            <td colspan="11">No activities yet</td>
                         </tr>
-                        <tr>
-                            <td>Coding</td>
-                            <td>4x</td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td>0%</td>
-                            <td>
-                                <button class="activity-actions-edit disable-button"><span class="material-symbols-outlined">edit</span></button>
-                                <button class="activity-actions-delete disable-button"><span class="material-symbols-outlined">delete</span></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Coding</td>
-                            <td>4x</td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td><input type="checkbox" disabled></td>
-                            <td>0%</td>
-                            <td>
-                                <button class="activity-actions-edit disable-button"><span class="material-symbols-outlined">edit</span></button>
-                                <button class="activity-actions-delete disable-button"><span class="material-symbols-outlined">delete</span></button>
-                            </td>
-                        </tr>
+                        <!-- rows will be added here dynamically -->
                     </tbody>
                 </table>
             </main>
-
         </section>
     </div>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>

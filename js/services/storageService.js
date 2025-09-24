@@ -105,7 +105,7 @@ export class StorageService {
 
         activities.push(newActivity);
         storageHandler.saveData('activities', activities);
-        this.saveLogsActivity({activityId: newActivity.id});
+        this.saveLogsActivity(newActivity.id);
     }
 
     static updateActivity(activityId, updatedData) {
@@ -133,6 +133,11 @@ export class StorageService {
         return activities.filter(activity => activity.userId === userId);
     }
 
+    static getActivityById(activityId){
+        const activities = this.getActivities()
+        return activities.find(activity => activity.id == activityId)
+    }
+
     // MAIN MESSAGE METHODS
     static setMainMessage(message){
         localStorage.setItem('mainMessage', message? JSON.stringify(message) : '');
@@ -146,10 +151,13 @@ export class StorageService {
         return storageHandler.getData('activityLogs');
     }
 
-    static saveLogsActivity(log) {
+    static saveLogsActivity(activityId) {
+        const activity = this.getActivityById(activityId)
         const logs = this.getActivityLogs();
         const newLog = {
-            ...log,
+            activityId : activity.id,
+            activityName : activity.name,
+            weeklyTarget : activity.weeklyTarget,
             id: Helper.generateId('log'),
             weekStart: Helper.weekRange()[0],
             weekEnd: Helper.weekRange()[6],

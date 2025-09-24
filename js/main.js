@@ -2,6 +2,7 @@ import { registerUserHandler } from "./auth/register.js";
 import { loginUserHandler } from "./auth/login.js";
 import { Tracker } from "./modules/tracker.js";
 import { Helper } from "./utils/helper.js";
+import { History } from "./modules/history.js";
 
 // halaman register
 if(document.getElementById('formRegister')){
@@ -68,8 +69,8 @@ if(document.getElementById('activity-week')){
 }
 
 
-if(document.querySelector('.activity-table')){
-    const activityTableBody = document.querySelector('.activity-tbody');
+if(document.getElementById('activity-table')){
+    const activityTableBody = document.getElementById('activity-tbody');
     const activities = Tracker.showActivity();
     
     if(activities.length == 0){
@@ -294,4 +295,66 @@ if(document.querySelectorAll(".activity-actions-delete")){
             });
         })
     })
+}
+
+// Halaman history
+const renderHistory = (history) => {
+    const row = document.createElement('tr')
+    row.innerHTML = `
+        <td>${history.activityName}</td>
+        <td>${history.weeklyTarget}</td>
+        <td><input type="checkbox" disabled ${history.checks.monday? "checked" : ""}></td>
+        <td><input type="checkbox" disabled ${history.checks.tuesday? "checked" : ""}></td>
+        <td><input type="checkbox" disabled ${history.checks.wednesday? "checked" : ""}></td>
+        <td><input type="checkbox" disabled ${history.checks.thursday? "checked" : ""}></td>
+        <td><input type="checkbox" disabled ${history.checks.friday? "checked" : ""}></td>
+        <td><input type="checkbox" disabled ${history.checks.saturday? "checked" : ""}></td>
+        <td><input type="checkbox" disabled ${history.checks.sunday? "checked" : ""}></td>
+        <td>${history.progress}%</td>
+        <td>
+            <button disabled="disabled" class="activity-actions-edit disable-button"><span class="material-symbols-outlined">edit</span></button>
+            <button disabled class="activity-actions-delete disable-button"><span class="material-symbols-outlined">delete</span></button>
+        </td>
+        `;
+    return row
+}
+
+if(document.getElementById('week1')){
+    const historyWeek = History.getHistoryWeeks(1)
+    const options = {month: 'long', day: 'numeric', year: 'numeric'};
+    document.getElementById('week1').textContent = `Week: ${historyWeek.weekStart.toLocaleDateString('en-US', options)} - ${historyWeek.weekEnd.toLocaleDateString('en-US', options)}`
+}
+
+if(document.getElementById('week2')){
+    const historyWeek = History.getHistoryWeeks(8)
+    const options = {month: 'long', day: 'numeric', year: 'numeric'};
+    document.getElementById('week2').textContent = `Week: ${historyWeek.weekStart.toLocaleDateString('en-US', options)} - ${historyWeek.weekEnd.toLocaleDateString('en-US', options)}`
+}
+
+if(document.getElementById('activity-table-lastWeek')){
+    const historyTableBody = document.getElementById('activity-tbody-lastWeek')
+    const histories = History.getActivityHistory(1)
+
+    if(histories.length === 0){
+        document.querySelector(".no-activity-history1").classList.remove("hidden");
+    }else{
+        document.querySelector(".no-activity-history1").classList.add("hidden");
+        histories.forEach(history => {
+            historyTableBody.appendChild(renderHistory(history))
+        })
+    }
+}
+
+if(document.getElementById('activity-table-twoWeeksAgo')){
+    const historyTableBody = document.getElementById('activity-tbody-twoWeeksAgo')
+    const histories = History.getActivityHistory(15)
+
+    if(histories.length === 0){
+        document.querySelector(".no-activity-history2").classList.remove("hidden");
+    }else{
+        document.querySelector(".no-activity-history2").classList.add("hidden");
+        histories.forEach(history => {
+            historyTableBody.appendChild(renderHistory(history))
+        })
+    }
 }

@@ -76,7 +76,7 @@ export class Tracker {
         const thisWeek = Helper.weekRange();
         let log =  logs.find(log => log.weekStart === thisWeek[0]);
         if(!log){
-            log = StorageService.saveLogsActivity({activityId})
+            log = StorageService.saveLogsActivity(activityId)
         }
         return log
     }

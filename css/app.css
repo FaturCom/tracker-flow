@@ -260,13 +260,18 @@ nav li .material-symbols-outlined {
 
 .disable-button{
     background-color: gray;
+    pointer-events: none !important;
+}
+
+.disable-button:hover{
+    cursor: not-allowed !important;
 }
 
 input[type="checkbox"]{
   transform: scale(1.3);
 }
 
-.no-activity td{
+.no-activity, .no-activity-history1, .no-activity-history2{
     padding: 20px;
     font-style: italic;
     color: #666;
