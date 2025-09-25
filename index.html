@@ -6,9 +6,9 @@
     <title>Track Flow</title>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const currentUser = localStorage.getItem('currentUserId')
+            const currentUser = localStorage.getItem('currentUser')
 
-            if(currentUser){
+            if(currentUser && currentUser !== ''){
                 window.location.href = "/pages/tracker.html";
             }else{
                 window.location.href = "/pages/login.html";

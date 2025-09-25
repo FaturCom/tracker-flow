@@ -5,7 +5,7 @@ export function loginUserHandler(username, password) {
     try {
         // Validasi form
         if (!username || !password) {
-            return { status: false, message: "Harap isi semua field" };
+            return { status: false, message: "Please fill in all fields" };
         }
 
         // Business logic dipindahkan ke StorageService
@@ -16,7 +16,7 @@ export function loginUserHandler(username, password) {
 
         return { 
             status: true, 
-            message: "Login berhasil",
+            message: "Login successful",
             user: user
         };
 

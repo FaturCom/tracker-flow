@@ -312,6 +312,10 @@ input[type="checkbox"]{
     align-items: center;
 }
 
+#modal-submit-logout{
+    background-color: #f16363;
+}
+
 @keyframes modalFadeIn {
     from { transform: translateY(40px) scale(0.98); opacity: 0; }
     to { transform: translateY(0) scale(1); opacity: 1; }
@@ -339,7 +343,7 @@ input[type="checkbox"]{
     gap: 4px;
 }
 
-.error-message {
+.error-message{
     color: #ef4444;
     background: #fef2f2;
     border: 1px solid #fecaca;
@@ -351,7 +355,7 @@ input[type="checkbox"]{
     width: 100%;
 }
 
-.successful-message {
+.successful-message, .successful-message-profile{
     color: #22c55e;
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
@@ -362,6 +366,12 @@ input[type="checkbox"]{
     text-align: center;
     justify-self: center;
     width: 90%;
+}
+
+.successful-message-profile{
+    margin-top: 0;
+    margin-bottom: 8px;
+    width: 100%;
 }
 
 .modal-content button{

@@ -52,7 +52,7 @@
                         <small class="settings-desc">(Coming soon)</small>
                     </div>
                     <div class="settings-section">
-                        <button class="settings-logout-btn">
+                        <button id="settings-logout-btn" class="settings-logout-btn">
                             <span class="material-symbols-outlined">logout</span> Logout
                         </button>
                     </div>
@@ -60,8 +60,8 @@
             </main>
 
             <!-- modal view -->
-            <div class="modal-view hidden">
-                <div class="modal-content" id="modal-logout">
+            <div id="modal-view-logout" class="modal-view hidden">
+                <div class="modal-content modal-logout">
                     <h2>Do you want to log out?</h2>
                     <div class="modal-actions">
                         <button type="button" class="modal-close" id="modal-close-logout"><span class="material-symbols-outlined">Close</span>Cancel</button>
@@ -71,5 +71,6 @@
             </div>
         </section>
     </div>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>

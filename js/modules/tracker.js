@@ -8,42 +8,42 @@ export class Tracker {
 
     static addActivity(newActivity){
         if(!newActivity.name){
-            return {status: false, message: "Nama aktivitas harus diisi"};
+            return {status: false, message: "The activity name is required"};
         }
         if(!newActivity.weeklyTarget){
-            return {status: false, message: "Target mingguan harus berupa diisi angka"};
+            return {status: false, message: "Weekly targets must be filled in with numbers"};
         }
         if(isNaN(newActivity.weeklyTarget) || newActivity.weeklyTarget <= 0){
-            return {status: false, message: "Target mingguan harus berupa angka lebih dari 0"};
+            return {status: false, message: "Weekly target must be a number greater than 0"};
         }
         if(newActivity.weeklyTarget > 7){
-            return {status: false, message: "Target mingguan tidak boleh lebih dari 7"};
+            return {status: false, message: "Weekly targets should not exceed 7"};
         }
 
         StorageService.createNewActivity(newActivity);
-        return {status: true, message: "Aktivitas berhasil ditambahkan"};
+        return {status: true, message: "Activity added successfully"};
     }
 
     static editActivity(activityId, newData, oldData){
         try{
             if(!newData.name){
-                return {status: false, message: "Nama aktivitas harus diisi"};
+                return {status: false, message: "The activity name is required"};
             }
             if(!newData.weeklyTarget){
-                return {status: false, message: "Target mingguan harus berupa diisi angka"}
+                return {status: false, message: "Weekly targets must be filled in with numbers"}
             }
             if(isNaN(newData.weeklyTarget) || newData.weeklyTarget <= 0){
-                return {status: false, message: "Target mingguan harus berupa angka lebih dari 0"}
+                return {status: false, message: "Weekly target must be a number greater than 0"}
             }
             if(newData.weeklyTarget > 7){
-            return {status: false, message: "Target mingguan tidak boleh lebih dari 7"};
+            return {status: false, message: "Weekly targets should not exceed 7"};
             }
             if(newData.name == oldData.name && newData.weeklyTarget == oldData.weeklyTarget){
-                return {status: false, message: "Tidak ada perubahan aktivitas"};
+                return {status: false, message: "No change in activity"};
             }
     
             StorageService.updateActivity(activityId, newData);
-            return {status: true, message: "Aktivitas berhasil diubah"};
+            return {status: true, message: "Activity changed successfully"};
         }catch(error){
             return {status: false, message: error.message};
         }
@@ -53,9 +53,9 @@ export class Tracker {
         const result = StorageService.deleteActivity(activityId);
 
         if(result){
-            return {status: true, message: "Aktivitas berhasil dihapus"};
+            return {status: true, message: "Activity deleted successfully"};
         }else{
-            return {status: false, message: "Aktivitas gagal dihapus"};
+            return {status: false, message: "Activity failed to delete"};
         }
     }
 

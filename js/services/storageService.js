@@ -18,12 +18,12 @@ export class StorageService {
         
         // Validasi: username harus unik
         if (this.getUserByUsername(user.username)) {
-            throw new Error(`Username "${user.username}" sudah digunakan`);
+            throw new Error(`Username "${user.username}" is already in use`);
         }
         
         // Validasi: password minimal 6 karakter
         if (user.password.length < 6) {
-            throw new Error('Password minimal 6 karakter');
+            throw new Error('Password must be at least 6 characters long');
         }
         
         // Business Logic: tambah metadata
@@ -40,15 +40,55 @@ export class StorageService {
         return newUser;
     }
 
+    static updateUsername(newUsername){
+        const users = this.getUsers();
+        const currentUser = this.getCurrentUser();
+        const indexUser = users.findIndex(user => user.id === currentUser.id);
+
+        if(indexUser === -1){
+            throw new Error("User index not found");
+        }
+
+        if(newUsername.trim() == ''){
+            throw new Error("Please fill in all fields")
+        }
+
+        users[indexUser] = {...users[indexUser], username: newUsername.trim()};
+        storageHandler.saveData('users', users);
+        return "username changed successfully";
+    }
+
+    static updatePassword(oldPassword, newPassword){
+        const users = this.getUsers();
+        const currentUser = this.getCurrentUser();
+        const indexUser = users.findIndex(user => user.id === currentUser.id);
+
+        if(indexUser === -1){
+            throw new Error("user not found");
+        }
+
+        if(users[indexUser].password !== oldPassword){
+            throw new Error("The old password is not suitable")
+        }
+
+        if(newPassword.length < 6){
+            throw new Error("password minimum 6 characters long")
+        }
+
+        users[indexUser] = {...users[indexUser], password: newPassword};
+        storageHandler.saveData('users', users);
+        return "password changed successfully";
+    }
+
     static validateLogin(username, password) {
         const user = this.getUserByUsername(username);
         
         if (!user) {
-            throw new Error('Username tidak ditemukan');
+            throw new Error('Username not found');
         }
         
         if (user.password !== password) {
-            throw new Error('Password salah');
+            throw new Error('Incorrect password');
         }
         
         // Update last login
@@ -68,6 +108,10 @@ export class StorageService {
         }
     }
 
+    static userLogout(){
+        localStorage.setItem('currentUser', '')
+    }
+
     static getUserById(userId) {
         const users = this.getUsers();
         return users.find(user => user.id === userId);
@@ -78,7 +122,6 @@ export class StorageService {
         return currentUser ? currentUser : null;
     }
 
-    // Untuk future use
     static setCurrentUser(userId) {
         localStorage.setItem('currentUser', userId);
     }

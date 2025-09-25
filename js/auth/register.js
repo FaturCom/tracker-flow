@@ -5,11 +5,11 @@ export function registerUserHandler(username, password, confirmPassword) {
     try {
         // Validasi form
         if (!username || !password || !confirmPassword) {
-            return { status: false, message: "Harap isi semua field" };
+            return { status: false, message: "Please fill in all fields" };
         }
 
         if (password !== confirmPassword) {
-            return { status: false, message: "Konfirmasi password harus sama" };
+            return { status: false, message: "Password confirmation must be the same" };
         }
 
         // Business logic dipindahkan ke StorageService
@@ -23,7 +23,7 @@ export function registerUserHandler(username, password, confirmPassword) {
 
         return {
             status: true, 
-            message: "Akun berhasil dibuat",
+            message: "Account created successfully",
             user: newUser
         };
 

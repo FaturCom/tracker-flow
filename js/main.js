@@ -3,6 +3,8 @@ import { loginUserHandler } from "./auth/login.js";
 import { Tracker } from "./modules/tracker.js";
 import { Helper } from "./utils/helper.js";
 import { History } from "./modules/history.js";
+import { Profile } from "./modules/profile.js";
+import { Settings } from "./modules/settings.js";
 
 // halaman register
 if(document.getElementById('formRegister')){
@@ -347,7 +349,7 @@ if(document.getElementById('activity-table-lastWeek')){
 
 if(document.getElementById('activity-table-twoWeeksAgo')){
     const historyTableBody = document.getElementById('activity-tbody-twoWeeksAgo')
-    const histories = History.getActivityHistory(15)
+    const histories = History.getActivityHistory(8)
 
     if(histories.length === 0){
         document.querySelector(".no-activity-history2").classList.remove("hidden");
@@ -357,4 +359,117 @@ if(document.getElementById('activity-table-twoWeeksAgo')){
             historyTableBody.appendChild(renderHistory(history))
         })
     }
+}
+
+// Halaman profile
+if(document.querySelector('.profile-card')){
+    const currentUser = Profile.loadUserProfile()
+    const createdAt = new Date(currentUser.createdAt)
+
+    const yyyy = createdAt.getFullYear();
+    const mm = String(createdAt.getMonth() + 1).padStart(2, '0');
+    const dd = String(createdAt.getDate()).padStart(2, '0');
+
+    const hh = String(createdAt.getHours()).padStart(2, '0');
+    const min = String(createdAt.getMinutes()).padStart(2, '0');
+
+    const formattedDate = `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+    document.getElementById('profile-username').textContent = currentUser.username;
+    document.getElementById('profile-id').textContent = `ID: ${currentUser.id}`;
+    document.getElementById('profile-created').textContent = formattedDate;
+}
+
+if(document.getElementById('profile-edit-password')){
+    const editButton = document.getElementById('profile-edit-password');
+    editButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const modalPassword = document.getElementById('modal-view-password');
+        const submitButton = document.getElementById('modal-submit-changePaswword')
+        const closeButton = document.getElementById('modal-close-changePaswword')
+        modalPassword.classList.remove('hidden');
+
+        submitButton.addEventListener('click', (e) => {
+            e.preventDefault()
+            const oldPassword = document.getElementById('old-password').value
+            const newPassword = document.getElementById('new-password').value
+
+            try{
+                const result = Profile.updatePassword(oldPassword, newPassword)
+                const succes = document.getElementById('modal-message-password')
+                succes.textContent = result
+                succes.classList.remove('error-message')
+                succes.classList.add('successful-message-profile')
+                setTimeout(() => {
+                    location.reload()
+                }, 1000)
+            }catch(err){
+                const error = document.getElementById('modal-message-password')
+                error.textContent = err.message
+                error.classList.remove('successful-message-profile')
+                error.classList.add('error-message')
+            }
+        })
+
+        closeButton.addEventListener('click', (e) => {
+            modalPassword.classList.add('hidden')
+        })
+    })
+}
+
+if(document.getElementById('profile-edit-username')){
+    const editButton = document.getElementById('profile-edit-username');
+    editButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        const modalUsername = document.getElementById('modal-view-username')
+        const submitButton = document.getElementById('modal-submit-changeUsername')
+        const closeButton = document.getElementById('modal-close-changeUsername')
+        modalUsername.classList.remove('hidden')
+
+        submitButton.addEventListener('click', (e) => {
+            e.preventDefault()
+            const newUsername = document.getElementById('changeUsername').value
+
+            try {
+                const result = Profile.updateUsername(newUsername)
+                const succes = document.getElementById('modal-message-username')
+                succes.textContent = result
+                succes.classList.remove('error-message')
+                succes.classList.add('successful-message-profile')
+                setTimeout(() => {
+                    location.reload()
+                }, 1000)
+            } catch (err) {
+                const error = document.getElementById('modal-message-username')
+                error.textContent = err.message
+                error.classList.remove('successful-message-profile')
+                error.classList.add('error-message')
+            }
+        })
+
+        closeButton.addEventListener('click', (e) => {
+            modalUsername.classList.add('hidden')
+        })
+    })
+}
+
+// Halaman settings/pengaturan
+if(document.getElementById('settings-logout-btn')){
+    const logoutButton = document.getElementById('settings-logout-btn');
+    logoutButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        const modalLogout = document.getElementById('modal-view-logout')
+        const submitButton = document.getElementById('modal-submit-logout')
+        const closeButton = document.getElementById('modal-close-logout')
+        modalLogout.classList.remove('hidden')
+
+        submitButton.addEventListener('click', (e) => {
+            e.preventDefault()
+            console.log(Settings.logOut())
+            window.location.href = "../pages/login.html"
+        })
+
+        closeButton.addEventListener('click', (e) => {
+            modalLogout.classList.add('hidden')
+        })
+    })
 }
