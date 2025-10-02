@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="../css/app.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = localStorage.getItem('currentUser')
+
+            if(!currentUser || currentUser === ''){
+                window.location.href = "login.html";
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">
