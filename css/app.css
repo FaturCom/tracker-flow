@@ -7,7 +7,6 @@
 
 /* STYLE SIDEBAR */
 .sidebar{
-    padding: 10px;
     height: 100vh;
     padding: 1.6rem;
     display: flex;
@@ -483,4 +482,74 @@ input[type="checkbox"]{
 .settings-logout-btn:hover {
     opacity: 0.7;
     box-shadow: 0 4px 16px rgba(241,99,99,0.13);
+}
+
+@media screen and (max-width: 768px) {
+    .container{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .sidebar{
+        height: auto;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 1.2rem 0.5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+
+    nav ul{
+       display: flex;
+       gap: 10px;
+    }
+
+    nav li{
+        margin-bottom: 0;
+    }
+
+    .main-content{
+        margin: 0;
+    }
+
+    .tracker-header{
+        width: 95%;
+        justify-self: center;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .main-table{
+        max-width: 95%;
+        justify-self: center;
+    }
+
+    .main-content table {
+        width: 100%;
+        margin: 1rem auto;
+        min-width: unset;
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .main-content th, .main-content td {
+        padding: 8px 6px;
+        font-size: 0.95rem;
+    }
+    .activity-table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .main-content header{
+        display: none !important;
+    }
+
+    html, body {
+        overflow-x: hidden;
+    }
 }

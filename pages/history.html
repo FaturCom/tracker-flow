@@ -50,59 +50,63 @@
                 <div class="tracker-header">
                     <p id="week1"></p>
                 </div>
+                <div class="main-table">
+                    <table class="activity-table" id="activity-table-lastWeek">
+                        <thead class="activity-thead">
+                            <tr>
+                                <th>Activity</th>
+                                <th>Weekly target</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                                <th>Progress</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="activity-tbody" id="activity-tbody-lastWeek">
+                            <tr aria-colspan="11" class="no-activity-history1 hidden">
+                                <td colspan="11">No activities yet</td>
+                            </tr>
+                            <!-- rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
 
                 <!-- tabel -->  
-                <table class="activity-table" id="activity-table-lastWeek">
-                    <thead class="activity-thead">
-                        <tr>
-                            <th>Activity</th>
-                            <th>Weekly target</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                            <th>Sun</th>
-                            <th>Progress</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="activity-tbody" id="activity-tbody-lastWeek">
-                        <tr aria-colspan="11" class="no-activity-history1 hidden">
-                            <td colspan="11">No activities yet</td>
-                        </tr>
-                        <!-- rows will be added here dynamically -->
-                    </tbody>
-                </table>
                 <div class="tracker-header">
                     <p id="week2"></p>
                 </div>
 
-                <!-- tabel -->  
-                <table class="activity-table" id="activity-table-twoWeeksAgo">
-                    <thead class="activity-thead">
-                        <tr>
-                            <th>Activity</th>
-                            <th>Weekly target</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                            <th>Sun</th>
-                            <th>Progress</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="activity-tbody" id="activity-tbody-twoWeeksAgo">
-                        <tr aria-colspan="11" class="no-activity-history2 hidden">
-                            <td colspan="11">No activities yet</td>
-                        </tr>
-                        <!-- rows will be added here dynamically -->
-                    </tbody>
-                </table>
+                <div class="main-table">
+                    <!-- tabel -->  
+                    <table class="activity-table" id="activity-table-twoWeeksAgo">
+                        <thead class="activity-thead">
+                            <tr>
+                                <th>Activity</th>
+                                <th>Weekly target</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                                <th>Progress</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="activity-tbody" id="activity-tbody-twoWeeksAgo">
+                            <tr aria-colspan="11" class="no-activity-history2 hidden">
+                                <td colspan="11">No activities yet</td>
+                            </tr>
+                            <!-- rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
             </main>
         </section>
     </div>

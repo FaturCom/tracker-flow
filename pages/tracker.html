@@ -54,30 +54,32 @@
                 <div id="main-message-container" class="hidden">
                     <p id="main-message" class=""></p>
                 </div>
-                <!-- tabel -->  
-                <table class="activity-table" id="activity-table">
-                    <thead class="activity-thead">
-                        <tr>
-                            <th>Activity</th>
-                            <th>Weekly target</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                            <th>Sun</th>
-                            <th>Progress</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="activity-tbody" id="activity-tbody">
-                        <tr aria-colspan="11" class="no-activity hidden">
-                            <td colspan="11">No activities yet. Please add an activity.</td>
-                        </tr>
-                        <!-- rows will be added here dynamically -->
-                    </tbody>
-                </table>
+                <div class="main-table">
+                    <!-- tabel -->  
+                    <table class="activity-table" id="activity-table">
+                        <thead class="activity-thead">
+                            <tr>
+                                <th>Activity</th>
+                                <th>Weekly target</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                                <th>Progress</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="activity-tbody" id="activity-tbody">
+                            <tr aria-colspan="11" class="no-activity hidden">
+                                <td colspan="11">No activities yet. Please add an activity.</td>
+                            </tr>
+                            <!-- rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
             </main>
             
             <!-- modal view -->
