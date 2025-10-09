@@ -521,6 +521,11 @@ input[type="checkbox"]{
         align-items: start;
     }
 
+    .successful-message{
+        width: 95%;
+        justify-self: center;
+    }
+
     .main-table{
         max-width: 95%;
         justify-self: center;
