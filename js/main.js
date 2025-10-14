@@ -95,8 +95,8 @@ if(document.getElementById('activity-table')){
                 <td><input type="checkbox" data-check="sunday" ${log.checks.sunday ? "checked" : ""}></td>
                 <td>${log.progress}%</td>
                 <td class="activity-actions">
-                    <button class="activity-actions-edit"><span class="material-symbols-outlined">edit</span></button>
-                    <button class="activity-actions-delete"><span class="material-symbols-outlined">delete</span></button>
+                    <button class="activity-actions-edit"><span class="material-symbols-outlined" translate="no">edit</span></button>
+                    <button class="activity-actions-delete"><span class="material-symbols-outlined" translate="no">delete</span></button>
                 </td>
             `;
             activityTableBody.appendChild(row);
@@ -207,7 +207,7 @@ if(document.getElementById("add-button")){
         formAddActivity.querySelectorAll("input, label").forEach(el => el.classList.remove("hidden"));
         document.querySelector(".modal-actions").classList.remove("modal-logout");
         modalTracker.querySelector("h2").textContent = "Add New Activity";
-        modalAddButton.innerHTML = `<span class="material-symbols-outlined">add</span>Add activity`;
+        modalAddButton.innerHTML = `<span class="material-symbols-outlined" translate="no">add</span>Add activity`;
         modalAddButton.classList.remove("modal-edit");
         modalAddButton.classList.add("modal-add");
         currentActions = "add";
@@ -244,7 +244,7 @@ if(document.querySelectorAll(".activity-actions-edit")){
             formAddActivity.querySelectorAll("input, label").forEach(el => el.classList.remove("hidden"));
             document.querySelector(".modal-actions").classList.remove("modal-logout");
             modalTracker.querySelector("h2").textContent = "Edit Activity";
-            modalEditButton.innerHTML = `<span class="material-symbols-outlined">edit</span>Edit activity`;
+            modalEditButton.innerHTML = `<span class="material-symbols-outlined" translate="no">edit</span>Edit activity`;
             modalEditButton.classList.add("modal-edit");
             modalEditButton.classList.remove("modal-add", "modal-delete");
             const odlNameActivity = document.getElementById("activityName").value = activityName;
@@ -280,7 +280,7 @@ if(document.querySelectorAll(".activity-actions-delete")){
             modalTracker.classList.remove("hidden");
             formAddActivity.querySelectorAll("input, label").forEach(el => el.classList.add("hidden"));
             document.querySelector(".modal-actions").classList.add("modal-logout");
-            modalDeleteButton.innerHTML = `<span class="material-symbols-outlined">delete</span>Delete activity`;
+            modalDeleteButton.innerHTML = `<span class="material-symbols-outlined" translate="no">delete</span>Delete activity`;
             modalDeleteButton.classList.add("modal-delete");
             modalDeleteButton.classList.remove("modal-add", "modal-edit");
 
@@ -314,8 +314,8 @@ const renderHistory = (history) => {
         <td><input type="checkbox" disabled ${history.checks.sunday? "checked" : ""}></td>
         <td>${history.progress}%</td>
         <td>
-            <button disabled="disabled" class="activity-actions-edit disable-button"><span class="material-symbols-outlined">edit</span></button>
-            <button disabled class="activity-actions-delete disable-button"><span class="material-symbols-outlined">delete</span></button>
+            <button disabled="disabled" class="activity-actions-edit disable-button"><span class="material-symbols-outlined" translate="no">edit</span></button>
+            <button disabled class="activity-actions-delete disable-button"><span class="material-symbols-outlined" translate="no">delete</span></button>
         </td>
         `;
     return row
