@@ -7,7 +7,7 @@
 
 /* STYLE SIDEBAR */
 .sidebar{
-    height: 100vh;
+    height: 100dvh;
     padding: 1.6rem;
     display: flex;
     flex-direction: column;
@@ -281,8 +281,8 @@ input[type="checkbox"]{
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -296,7 +296,7 @@ input[type="checkbox"]{
     box-shadow: 0 8px 32px rgba(0,0,0,0.18);
     padding: 2rem 1.5rem;
     min-width: 320px;
-    max-width: 90vw;
+    max-width: 90dvw;
     width: 400px;
     min-height: 180px;
     position: relative;
